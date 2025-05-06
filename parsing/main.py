@@ -8,9 +8,6 @@ import sys
 
 
 def print_progress_bar(iteration, total, prefix='', suffix='', length=50, fill='█'):
-    """
-    Выводит прогресс-бар в консоль
-    """
     percent = ("{0:.1f}").format(100 * (iteration / float(total)))
     filled_length = int(length * iteration // total)
     bar = fill * filled_length + '-' * (length - filled_length)
@@ -153,15 +150,11 @@ def save_to_excel(data, filename='schools_data.xlsx'):
     wb.save(filename)
     print(f"\nДанные сохранены в файл: {filename}")
 
-
-# Основной код
 base_url = "https://doit-together.ru/head/66/?scroll=school_full_list0"
 print("Начинаем сбор данных...")
 
-# 1. Собираем все школы со всех страниц
 schools = get_school_links(base_url, max_pages=7)
 
-# 2. Парсим информацию о каждой школе
 print("\nОбработка информации о школах:")
 all_data = []
 total_schools = len(schools)
@@ -178,7 +171,6 @@ for i, school in enumerate(schools, start=2):
         all_data.append(school_data)
     time.sleep(0.3)
 
-# 3. Сохраняем результаты в Excel
 save_to_excel(all_data)
 
 print("\nОбработка всех данных завершена успешно!")
